@@ -7,14 +7,14 @@ const userSchema = mongoose.Schema(
       type: String,
       require: true,
     },
+    lastName: {
+      type: String,
+      require: true,
+    },
     email: {
       type: String,
       require: true,
       unique: true,
-    },
-    lastName: {
-      type: String,
-      require: true,
     },
     phone: {
       type: String,
@@ -26,11 +26,6 @@ const userSchema = mongoose.Schema(
     },
     refreshToken: {
       type: String,
-    },
-    isTutor: {
-      type: Boolean,
-      require: true,
-      default: false,
     },
     roles: {
       User: {

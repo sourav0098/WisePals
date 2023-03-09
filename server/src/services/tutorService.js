@@ -1,3 +1,4 @@
+import roles from "../config/rolesList.js";
 import Tutor from "../database/models/tutorModel.js";
 import User from "../database/models/userModel.js";
 
@@ -21,7 +22,7 @@ export const createNewTutorService = async ({ profile, file }) => {
 
   try {
     const tutor = await new Tutor(data).save();
-    await User.updateOne({ _id: data.userId }, { $set: { isTutor: true } }); // Add this line to update the User table
+    await User.updateOne({ _id: data.userId }, { $set: { roles: { User:roles.user, Tutor: roles.tutor } } }); // Add this line to update the role in User table
   return tutor;
   } catch (error) {
     if (error.name === 'MongoError' && error.code === 11000) {
