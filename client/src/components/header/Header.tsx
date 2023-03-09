@@ -13,11 +13,13 @@ import Authentication from "../../pages/Authentication";
 import { API_ENDPOINTS } from "../../utils/apiEndpoints";
 import useRefreshToken from "../../hooks/useRefreshToken";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import { useSelector } from "react-redux";
 
 interface Props extends RouteComponentProps {}
 
 const Header: React.FC<Props> = (props) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const user = useSelector((state: any) => state.session);
   const path = useLocation().pathname;
   const refresh = useRefreshToken();
   const axiosPrivate = useAxiosPrivate();
@@ -56,9 +58,15 @@ const Header: React.FC<Props> = (props) => {
           Test Auth
         </button>
       </div>
-      <div className={HeaderCSS.login} onClick={() => setIsModalOpen(true)}>
-        <MdLogin /> <div className={HeaderCSS.loginText}>Login</div>
-      </div>
+      {user.id === "" ? (
+        <div className={HeaderCSS.login} onClick={() => setIsModalOpen(true)}>
+          <MdLogin /> <div className={HeaderCSS.loginText}>Login</div>
+        </div>
+      ) : (
+        <div className={HeaderCSS.links}>
+          <Link to={"/userProfile"}>Profile</Link>
+        </div>
+      )}
       <Link to={"/statistics"} className={HeaderCSS.companyName}>
         <img className={HeaderCSS.logo} src={statistics} alt="logo" />
       </Link>

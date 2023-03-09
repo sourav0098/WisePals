@@ -27,8 +27,6 @@ const ContactTutor = () => {
   const [foundTutor, setFoundTutor] = useState(false);
   const user = useSelector((state: any) => state.session);
 
-  console.log(user);
-
   useEffect(() => {
     axios
       .get(`http://localhost:5001/api/v1/tutors/byId/?id=${tutor}`, {
@@ -65,7 +63,7 @@ const ContactTutor = () => {
         language: language,
         skill: skill,
         description: description,
-        user: "test user",
+        user: user.id,
         tutor: tutor,
       }),
     }).then((response) => {

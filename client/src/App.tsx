@@ -36,9 +36,12 @@ const App: React.FC<Props> = () => {
           </Route>
           <Route path="/tutorProfile/:id" element={<TutorProfile />} />
           <Route path="/statistics" element={<TutorStatistics />} />
-          <Route path="/contactTutor/:tutor" element={<ContactTutor />} />
-          <Route path="/userProfile" element={<UserProfile />} />
-
+          <Route element={<RequireAuth allowedRoles={[ROLES.USER]} />}>
+            <Route path="/contactTutor/:tutor" element={<ContactTutor />} />
+          </Route>
+          <Route element={<RequireAuth allowedRoles={[ROLES.USER]} />}>
+            <Route path="/userProfile" element={<UserProfile />} />
+          </Route>
           <Route
             path="/authentication"
             element={
