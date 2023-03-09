@@ -88,6 +88,7 @@ const Login: React.FC<LoginProps> = ({
             name: response?.data?.name,
             lastName: response?.data?.lastName,
             phone: response?.data?.phone,
+            id: response?.data.id,
           })
         );
         //Navigate to the screen where the user wanted to go

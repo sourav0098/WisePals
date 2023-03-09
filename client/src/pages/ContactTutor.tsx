@@ -13,6 +13,7 @@ import { Button } from "@mui/material";
 import { useParams } from "react-router-dom";
 import axios from "../lib/axios.ts";
 import Swal from "sweetalert2";
+import { useSelector } from "react-redux";
 
 const ContactTutor = () => {
   const { tutor } = useParams();
@@ -24,6 +25,9 @@ const ContactTutor = () => {
   const [skillOptions, setSkillsOptions] = useState([]);
   const [languageOptions, setLanguageOptions] = useState([]);
   const [foundTutor, setFoundTutor] = useState(false);
+  const user = useSelector((state: any) => state.session);
+
+  console.log(user);
 
   useEffect(() => {
     axios
