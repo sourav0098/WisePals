@@ -31,6 +31,6 @@ router
   .get("/:id", getTutorById)
   //TODO: Add the verifyJWT middleware to the post route once the createNewTutor controller is ready
   // .post("/", verifyJWT, createNewTutor);
-  .post("/",createNewTutor);
+  .post("/", createNewTutor);
 
 export default router;
