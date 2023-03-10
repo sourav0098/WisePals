@@ -22,7 +22,7 @@ export const listStatisticsController = (req, res) => {
 };
 
 export const insertFormsController = (req, res) => {
-  const transporter = nodemailer.createTransport({
+  /*const transporter = nodemailer.createTransport({
     service: "gmail",
     host: "smtp.gmail.com",
     port: 587,
@@ -44,6 +44,10 @@ export const insertFormsController = (req, res) => {
     insertContactForm(data).then((result) => {
       res.send(result);
     });
+  });*/
+  let data = req.body;
+  insertContactForm(data).then((result) => {
+    res.send(result);
   });
 };
 
