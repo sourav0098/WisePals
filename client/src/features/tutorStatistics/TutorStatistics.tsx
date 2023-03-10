@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Paper from "@mui/material/Paper";
+import axios from "../../lib/axios";
 import { Container } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import {
@@ -30,7 +31,7 @@ export const options: any = {
     },
     title: {
       display: true,
-      text: "Courses VS Students",
+      text: "Tutor Contact Statistics by Day of the Week for Current Week",
     },
   },
   scales: {
@@ -49,6 +50,42 @@ export const options: any = {
   },
 };
 const TutorStatistics = () => {
+  const [totalContacts, setTotalContacts] = useState<number>();
+  const [contactStat, setContactStat] = useState<any>([]);
+  useEffect(() => {
+    axios
+      .get(
+        `http://localhost:5001/api/v1/contact/statistics/640745747471f3316bd0710e`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then((res: any) => {
+        const daysOfWeek = [
+          "Sunday",
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+        ];
+        let sum = 0;
+
+        const contactStatsByDayOfWeek = daysOfWeek.map((dayOfWeek) => {
+          const count = res.data[dayOfWeek] || 0;
+          sum = count + sum;
+          return { day: dayOfWeek.toLowerCase(), contacts: count };
+        });
+
+        console.log(contactStatsByDayOfWeek);
+        setContactStat(contactStatsByDayOfWeek);
+        setTotalContacts(sum);
+      });
+  }, []);
+
   const courses = [
     {
       title: "Introduction to React",
@@ -76,11 +113,11 @@ const TutorStatistics = () => {
     0
   );
   const data = {
-    labels: courses.map((course) => course.title),
+    labels: contactStat.map((contact: any) => contact.day),
     datasets: [
       {
         label: "Students",
-        data: courses.map((course) => course.students),
+        data: contactStat.map((contact: any) => contact.contacts),
         backgroundColor: "rgba(0, 150, 255, 0.5)",
       },
     ],
@@ -92,7 +129,9 @@ const TutorStatistics = () => {
         <Typography variant="h5" component="h3">
           Tutor Statistics
         </Typography>
-        <Typography component="p">Courses taught: {courses.length}</Typography>
+        <Typography component="p">
+          Number of times Contacted: {totalContacts}{" "}
+        </Typography>
         <Typography component="p">Students attending: {students}</Typography>
         <Typography component="p">
           Average student rating: {avgRating}

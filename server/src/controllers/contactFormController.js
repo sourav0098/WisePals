@@ -3,6 +3,7 @@ import {
   insertContactForm,
   updateContactForm,
   deleteContactForm,
+  listStatistics,
 } from "../services/contactService.js";
 import nodemailer from "nodemailer";
 
@@ -10,6 +11,12 @@ export const listContactFormsController = (req, res) => {
   let page = req.query.page === undefined ? 1 : req.query.page;
   let perPage = req.query.perPage === undefined ? 10 : req.query.perPage;
   listContactForm(page, perPage).then((data) => {
+    res.send(data);
+  });
+};
+export const listStatisticsController = (req, res) => {
+  let id = req.params.id;
+  listStatistics(id).then((data) => {
     res.send(data);
   });
 };
