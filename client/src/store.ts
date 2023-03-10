@@ -11,6 +11,7 @@ interface RootState {
   tutorProfileSlice: ReturnType<typeof tutorProfileSlice>;
   session: ReturnType<typeof session>;
   reviewSlice: ReturnType<typeof reviewSlice>;
+  
 }
 
 export const store = configureStore<RootState>({

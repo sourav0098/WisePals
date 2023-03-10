@@ -3,6 +3,8 @@ import ReactDOM from "react-dom";
 import ModalCSS from "../../assets/Modal.module.css";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../../features/authentication/store/authenticationSlice";
 
 interface ModalProps {
   open: boolean;
@@ -11,10 +13,10 @@ interface ModalProps {
 }
 
 const Modal: React.FC<ModalProps> = ({ open, setIsModalOpen, children }) => {
-  const navigate = useNavigate();
-  // useEffect(() => {
-  //   setIsModalOpen(true);
-  // }, []);
+  const user = useSelector((state: any) => state.session);
+  useEffect(() => {
+    if (user?.id) setIsModalOpen(false);
+  }, [user]);
 
   if (!open) {
     // navigate("/");
