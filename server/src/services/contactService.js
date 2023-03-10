@@ -41,6 +41,24 @@ export const listStatistics = async (id) => {
       now.getDate() + (6 - now.getDay())
     );
 
+    const skillsContacted = await contactSchema.aggregate([
+      {
+        $match: {
+          tutor: id,
+          createdAt: {
+            $gte: startOfWeek,
+          },
+        },
+      },
+      {
+        $group: {
+          _id: "$skill",
+        },
+      },
+    ]);
+
+    const skills = skillsContacted.map((skill) => skill._id);
+
     // find the number of contacts for the given tutor in the current week
     const contacts = await contactSchema.find({
       tutor: id,
@@ -63,7 +81,7 @@ export const listStatistics = async (id) => {
         contactsByDayOfWeek[dayOfWeek] =
           (contactsByDayOfWeek[dayOfWeek] || 0) + 1;
       });
-      return contactsByDayOfWeek;
+      return { contactsByDayOfWeek, skills };
     }
   } catch (error) {
     throw new Error(error.message);

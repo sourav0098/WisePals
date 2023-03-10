@@ -52,6 +52,7 @@ export const options: any = {
 const TutorStatistics = () => {
   const [totalContacts, setTotalContacts] = useState<number>();
   const [contactStat, setContactStat] = useState<any>([]);
+  const [skills, setSkills] = useState<any>();
   useEffect(() => {
     axios
       .get(
@@ -63,6 +64,7 @@ const TutorStatistics = () => {
         }
       )
       .then((res: any) => {
+        console.log(res);
         const daysOfWeek = [
           "Sunday",
           "Monday",
@@ -75,7 +77,7 @@ const TutorStatistics = () => {
         let sum = 0;
 
         const contactStatsByDayOfWeek = daysOfWeek.map((dayOfWeek) => {
-          const count = res.data[dayOfWeek] || 0;
+          const count = res.data.contactsByDayOfWeek[dayOfWeek] || 0;
           sum = count + sum;
           return { day: dayOfWeek.toLowerCase(), contacts: count };
         });
@@ -83,6 +85,7 @@ const TutorStatistics = () => {
         console.log(contactStatsByDayOfWeek);
         setContactStat(contactStatsByDayOfWeek);
         setTotalContacts(sum);
+        setSkills(res.data.skills);
       });
   }, []);
 
@@ -132,11 +135,22 @@ const TutorStatistics = () => {
         <Typography component="p">
           Number of times Contacted: {totalContacts}{" "}
         </Typography>
-        <Typography component="p">Students attending: {students}</Typography>
         <Typography component="p">
-          Average student rating: {avgRating}
+          Skills for which the tutor was contacted this week:
         </Typography>
-        <Typography component="p">Total earnings: {earnings}</Typography>
+
+        <Typography component="p" sx={{ px: 5 }}>
+          {skills.length > 0 ? (
+            <ul>
+              {skills.map((skill: string) => (
+                <li key={skill}>{skill}</li>
+              ))}
+            </ul>
+          ) : (
+            <p>No skills found.</p>
+          )}
+        </Typography>
+
         <Typography component="div" sx={{ py: 2, px: 20 }}>
           <Bar options={options} data={data} />
         </Typography>
