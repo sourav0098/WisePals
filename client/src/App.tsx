@@ -29,13 +29,24 @@ const App: React.FC<Props> = () => {
         <Header />
 
         <Routes>
-          <Route path="/" element={<LandingPage />} />
+          <Route
+            element={
+              <RequireAuth
+                allowedRoles={[ROLES.USER, ROLES.TUTOR, ROLES.ADMIN]}
+              />
+            }
+          >
+            <Route path="/" element={<LandingPage />} />
+          </Route>
           <Route path="/tutors/:skill" element={<FilterTutors />} />
           <Route element={<RequireAuth allowedRoles={[ROLES.USER]} />}>
             <Route path="/addTutor" element={<NewTutorForm />} />
           </Route>
           <Route path="/tutorProfile/:id" element={<TutorProfile />} />
-          <Route path="/statistics" element={<TutorStatistics />} />
+          <Route element={<RequireAuth allowedRoles={[ROLES.TUTOR]} />}>
+            <Route path="/statistics" element={<TutorStatistics />} />
+          </Route>
+
           <Route element={<RequireAuth allowedRoles={[ROLES.USER]} />}>
             <Route path="/contactTutor/:tutor" element={<ContactTutor />} />
           </Route>

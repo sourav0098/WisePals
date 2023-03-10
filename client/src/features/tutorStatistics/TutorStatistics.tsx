@@ -13,6 +13,7 @@ import {
   Legend,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
+import { useSelector } from "react-redux";
 
 ChartJS.register(
   CategoryScale,
@@ -36,19 +37,17 @@ export const options: any = {
   },
 };
 const TutorStatistics = () => {
+  const user = useSelector((state: any) => state.session);
   const [totalContacts, setTotalContacts] = useState<number>();
   const [contactStat, setContactStat] = useState<any>([]);
   const [skills, setSkills] = useState<any>();
   useEffect(() => {
     axios
-      .get(
-        `http://localhost:5001/api/v1/contact/statistics/640745747471f3316bd0710e`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      )
+      .get(`http://localhost:5001/api/v1/contact/statistics/${user.id}`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
       .then((res: any) => {
         const daysOfWeek = [
           "Sunday",

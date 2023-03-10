@@ -14,6 +14,7 @@ import { API_ENDPOINTS } from "../../utils/apiEndpoints";
 import useRefreshToken from "../../hooks/useRefreshToken";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { useSelector } from "react-redux";
+import ROLES from "../../utils/rolesList";
 
 interface Props extends RouteComponentProps {}
 
@@ -66,9 +67,14 @@ const Header: React.FC<Props> = (props) => {
           <Link to={"/userProfile"}>Profile</Link>
         </div>
       )}
-      <Link to={"/statistics"} className={HeaderCSS.companyName}>
-        <img className={HeaderCSS.logo} src={statistics} alt="logo" />
-      </Link>
+      {user?.roles?.includes(ROLES.TUTOR) ? (
+        <Link to={"/statistics"} className={HeaderCSS.companyName}>
+          <img className={HeaderCSS.logo} src={statistics} alt="logo" />
+        </Link>
+      ) : (
+        <></>
+      )}
+
       <Modal open={isModalOpen} setIsModalOpen={setIsModalOpen}>
         <Authentication />
       </Modal>
