@@ -34,20 +34,6 @@ export const options: any = {
       text: "Tutor Contact Statistics by Day of the Week for Current Week",
     },
   },
-  scales: {
-    yAxes: [
-      {
-        ticks: {
-          beginAtZero: true,
-        },
-      },
-    ],
-    xAxes: [
-      {
-        barPercentage: 0.2,
-      },
-    ],
-  },
 };
 const TutorStatistics = () => {
   const [totalContacts, setTotalContacts] = useState<number>();
@@ -64,7 +50,6 @@ const TutorStatistics = () => {
         }
       )
       .then((res: any) => {
-        console.log(res);
         const daysOfWeek = [
           "Sunday",
           "Monday",
@@ -82,39 +67,12 @@ const TutorStatistics = () => {
           return { day: dayOfWeek.toLowerCase(), contacts: count };
         });
 
-        console.log(contactStatsByDayOfWeek);
         setContactStat(contactStatsByDayOfWeek);
         setTotalContacts(sum);
         setSkills(res.data.skills);
       });
   }, []);
 
-  const courses = [
-    {
-      title: "Introduction to React",
-      students: 50,
-    },
-    {
-      title: "Advanced JavaScript",
-      students: 30,
-    },
-    {
-      title: "Introduction to Node.js",
-      students: 40,
-    },
-  ];
-
-  const students = courses.reduce(
-    (total, course) => total + course.students,
-    0
-  );
-
-  const avgRating = 4.5;
-
-  const earnings = courses.reduce(
-    (total, course) => total + course.students * 20,
-    0
-  );
   const data = {
     labels: contactStat.map((contact: any) => contact.day),
     datasets: [
@@ -139,8 +97,8 @@ const TutorStatistics = () => {
           Skills for which the tutor was contacted this week:
         </Typography>
 
-        <Typography component="p" sx={{ px: 5 }}>
-          {skills.length > 0 ? (
+        <Typography component="div" sx={{ px: 5 }}>
+          {skills && skills.length > 0 ? (
             <ul>
               {skills.map((skill: string) => (
                 <li key={skill}>{skill}</li>
