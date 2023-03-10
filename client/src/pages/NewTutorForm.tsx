@@ -23,7 +23,7 @@ import { addTutor } from "../features/addTutor/store/tutorSlice";
 const NewTutorForm = () => {
   //Get the user session from the redux store
   const user = useSelector((state) => state.session);
-
+console.log(user)
   const dispatch = useDispatch();
   const { loading, status } = useSelector((state) => ({
     ...state.tutorSlice,
@@ -146,7 +146,7 @@ const NewTutorForm = () => {
       //No errors
       const addTutorAction = addTutor({
         values: {
-          userId: user._id,
+          userId: user.id,
           fname: user.name,
           lname: user.lastName,
           image: image[0],

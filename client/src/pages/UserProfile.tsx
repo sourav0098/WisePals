@@ -3,9 +3,10 @@ import UserCard from "../features/userProfile/UserCard.tsx";
 import { Box, Container } from "@mui/material";
 import TutorCard from "../features/userProfile/TutorCard.tsx";
 import axios from "../lib/axios.ts";
+import { useSelector } from "react-redux";
 
 const UserProfile = () => {
-  const userID = "640a0a5eefee9167952a562b";
+  const user = useSelector((state: any) => state.session);
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -15,7 +16,7 @@ const UserProfile = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5001/api/v1/user/byId/?id=${userID}`, {
+      .get(`http://localhost:5001/api/v1/user/byId/?id=${user.id}`, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -25,7 +26,7 @@ const UserProfile = () => {
         setLastName(res.data.lastName);
         setEmail(res.data.email);
         setPhone(res.data.phone);
-        setIsTutor(res.data.isTutor);
+        setIsTutor(user.roles.includes(5777));
         setIsLoading(false);
       });
   }, []);

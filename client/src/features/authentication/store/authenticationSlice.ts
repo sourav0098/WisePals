@@ -1,42 +1,42 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 interface AuthenticationState {
-    email: string;
-    password: string;
-    accessToken: string;
-    roles: [string];
-    _id: string;
-    name: string;
-    lastName: string;
-    phone: string;
-  }
-  
-  const initialState: AuthenticationState = {
-    email: "",
-    password: "",
-    accessToken: "",
-    roles: [""],
-    _id: "",
-    name: "",
-    lastName: "",
-    phone: ""
-  };
+  email: string;
+  password: string;
+  accessToken: string;
+  roles: [string];
+  name: string;
+  lastName: string;
+  phone: string;
+  id: string;
+}
+
+const initialState: AuthenticationState = {
+  email: "",
+  password: "",
+  accessToken: "",
+  roles: [""],
+  name: "",
+  lastName: "",
+  phone: "",
+  id: "",
+};
 
 export const authenticationSlice = createSlice({
-    name: "session",
-    initialState,
-    reducers: {
-        login: (state, action) => {
-            state._id = action.payload._id;
-            state.email = action.payload.email;
-            state.name = action.payload.name;
-            state.lastName = action.payload.lastName;
-            state.phone = action.payload.phone;
-            state.password = action.payload.password;
-            state.accessToken = action.payload.accessToken;
-            state.roles = action.payload.roles;
-        }
-    }
+  name: "session",
+  initialState,
+  reducers: {
+    login: (state, action) => {
+      state.id = action.payload.id; 
+      state.email = action.payload.email;
+      state.name = action.payload.name;
+      state.lastName = action.payload.lastName;
+      state.phone = action.payload.phone;
+      state.password = action.payload.password;
+      state.accessToken = action.payload.accessToken;
+      state.roles = action.payload.roles;
+    },
+  },
 });
 
 //Export the actions

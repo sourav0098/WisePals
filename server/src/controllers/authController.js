@@ -9,7 +9,7 @@ export const loginUser = async (req, res) => {
     return;
   }
   try {
-    const [refreshToken, accessToken, roles, _id, name, lastName, phone] =
+    const [refreshToken, accessToken, roles, id, name, lastName, phone] =
       await handleLoginService(email, password);
     if (refreshToken) {
       res.cookie("jwt", refreshToken, {
@@ -18,7 +18,7 @@ export const loginUser = async (req, res) => {
         secure: true,
         maxAge: process.env.REFRESH_TOKEN_COOKIE_MAX_AGE,
       });
-      res.status(200).json({ accessToken, roles, _id, name, lastName, phone });
+      res.status(200).json({ refreshToken, accessToken, roles, id, name, lastName, phone });
     }
   } catch (error) {
     if (error.message === "Not valid credentials") {

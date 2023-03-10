@@ -14,9 +14,10 @@ import ImageUpload from "./components/ImageUpload.tsx";
 import axios from "../../lib/axios.ts";
 import Swal from "sweetalert2";
 import { FileWithPath } from "react-dropzone";
+import { useSelector } from "react-redux";
 
 const TutorCard = () => {
-  const userID = "63ee8670020ff35a7b716eb0";
+  const user = useSelector((state: any) => state.session);
   const [picture, setPicture] = useState("");
   const [skills, setSkills] = useState([]);
   const [languages, setLanguages] = useState([]);
@@ -27,7 +28,7 @@ const TutorCard = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5001/api/v1/tutors/byUser/?id=${userID}`, {
+      .get(`http://localhost:5001/api/v1/tutors/byUser/?id=${user.id}`, {
         headers: {
           "Content-Type": "application/json",
         },

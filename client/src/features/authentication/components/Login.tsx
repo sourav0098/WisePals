@@ -81,11 +81,11 @@ const Login: React.FC<LoginProps> = ({
         // Dispatch login action
         dispatch(
           login({
-            _id: response?.data?._id,
             email: form.email,
             password: form.password,
             accessToken,
             roles,
+            id: response?.data.id,
             name: response?.data?.name,
             lastName: response?.data?.lastName,
             phone: response?.data?.phone,
