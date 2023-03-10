@@ -22,7 +22,7 @@ const FilterBar: React.FC<Props> = ({
       <div className={FilterBarCSS.filterItemContainer}>
         <PriceSlider
           highestPrice={Math.max(
-            ...tutorItems.map((tutor) => tutor.lessonCost)
+            ...tutorItems.map((tutor) => tutor.hourlyRate)
           )}
           setPriceFilter={setPriceFilter}
         />

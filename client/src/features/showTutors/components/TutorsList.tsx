@@ -30,15 +30,22 @@ const TutorsList = () => {
 
   const tutors = useSelector(getAllTutors);
 
+  console.log("tutors: ", tutors);
+
   if (!tutors) return <div>Loading...</div>;
   //Map function is to do something to each element of the array
   const tutorItems = tutors.map((tutor: { _id: string }) => {
     return (
       <Tutor
+        key={tutor._id}
         priceFilter={priceFilter}
         languagesFilter={spokenLanguagesFilter}
-        key={tutor._id}
-        tutor={tutor}
+        name={`${tutor.fname} ${tutor.lname}`}
+        description={tutor.description}
+        skills={tutor.skills}
+        spokenLanguages={tutor.spokenLanguages}
+        lessonCost={tutor.hourlyRate}
+        picture={tutor.image}
       />
     );
   });
