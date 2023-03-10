@@ -4,8 +4,10 @@ import { API_ENDPOINTS } from "../../../utils/apiEndpoints";
 
 interface AddTutorArgs {
   values: {
-    image: File;
     userId: string;
+    fname: string;
+    lname: string;
+    image: File;
     description: string;
     spokenLanguages: string[];
     skills: string[];
@@ -23,8 +25,10 @@ export const addTutor = createAsyncThunk(
     "post/addTutor",
     async ({ values }: AddTutorArgs) => {
       const formData = new FormData();
-      formData.append("image", values.image);
       formData.append("userId", values.userId);
+      formData.append("fname", values.fname);
+      formData.append("lname", values.lname);
+      formData.append("image", values.image);
       formData.append("description", values.description);
       values.spokenLanguages.forEach((language) =>
         formData.append("spokenLanguages", language)

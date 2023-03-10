@@ -17,7 +17,7 @@ export const getReviewsByTutorIdService = async (tutorId) => {
       path: "reviews",
       populate: {
         path: "userId",
-        select: "userId name",
+        select: "userId name lastName",
       },
     })
     .exec();
@@ -33,11 +33,11 @@ export const getReviewsByTutorIdService = async (tutorId) => {
 
   const reviews = {
     tutorId: tutor._id,
-    userName: tutor.reviews[0].userId.name,
     numReviews: doc.numReviews,
     reviews: tutor.reviews.map(review => {
       return {
         id: review._id,
+        userId: review.userId,
         rating: review.rating,
         review: review.review,
         createdAt: review.createdAt,

@@ -6,6 +6,15 @@ const tutorSchema = new mongoose.Schema(
       type: String,
       unique: true,
       required: true,
+      ref:"User"
+    },
+    fname:{
+      type:String,
+      require:true
+    },
+    lname:{
+      type:String,
+      require:true
     },
     image: {
       type: String,

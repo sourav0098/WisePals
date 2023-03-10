@@ -12,6 +12,8 @@ export const getTutorsService = async (skill) => {
 export const createNewTutorService = async ({ profile, file }) => {
   let data = {
     userId: profile.userId,
+    fname: profile.fname,
+    lname: profile.lname,
     image: file,
     description: profile.description,
     spokenLanguages: profile.spokenLanguages,
@@ -22,16 +24,16 @@ export const createNewTutorService = async ({ profile, file }) => {
 
   try {
     const tutor = await new Tutor(data).save();
-    await User.updateOne({ _id: data.userId }, { $set: { roles: { User:roles.user, Tutor: roles.tutor } } }); // Add this line to update the role in User table
+    // Add this line to update the role in User table
+    await User.updateOne({ _id: data.userId }, { $set: { roles: { User:roles.user, Tutor: roles.tutor } } });
   return tutor;
   } catch (error) {
     if (error.name === 'MongoError' && error.code === 11000) {
-      throw new Error(`User ID '${profile.userId}' already exists`);
+      throw new Error(`User already registered as tutor`);
     } else {
       throw error;
     }
   }
-
 };
 
 export const getTutorService = async (id) => {
@@ -41,9 +43,10 @@ export const getTutorService = async (id) => {
 
 // Get Tutor by ID
 export const getTutorByIdService = async (id) => {
-  const tutor = await Tutor.findOne({ _id: id }).populate({ path: 'userId', select: 'name email' }).exec();
+  const tutor = await Tutor.findOne({ _id: id }).populate({ path: 'userId', select: 'name lastName email' }).exec();
   return tutor;
 }
+
 export const getTutorByUserService = async (id) => {
   const tutor = await Tutor.findOne({
     userId: id,

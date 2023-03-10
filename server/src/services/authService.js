@@ -51,6 +51,7 @@ export const handleLoginService = async (email, password) => {
     refreshToken,
     accessToken,
     roles,
+    userExists._id,
     userExists.name,
     userExists.lastName,
     userExists.phone,

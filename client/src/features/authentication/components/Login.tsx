@@ -81,6 +81,7 @@ const Login: React.FC<LoginProps> = ({
         // Dispatch login action
         dispatch(
           login({
+            _id: response?.data?._id,
             email: form.email,
             password: form.password,
             accessToken,

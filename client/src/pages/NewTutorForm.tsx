@@ -23,11 +23,10 @@ import { addTutor } from "../features/addTutor/store/tutorSlice";
 const NewTutorForm = () => {
   //Get the user session from the redux store
   const user = useSelector((state) => state.session);
-  console.log("User info: ", { user });
 
   const dispatch = useDispatch();
   const { loading, status } = useSelector((state) => ({
-    ...state.tutorSlice
+    ...state.tutorSlice,
   }));
 
   // image upload
@@ -112,9 +111,8 @@ const NewTutorForm = () => {
       });
     } else if (loading === false && status === 409) {
       Swal.fire({
-        title: "Error!",
         text: "User is aleady registered as tutor",
-        icon: "error",
+        icon: "info",
         confirmButtonText: "OK",
       });
     } else if (loading === false && status) {
@@ -128,7 +126,6 @@ const NewTutorForm = () => {
   };
   useEffect(() => {
     showAlert(loading, Number(status));
-    console.log(loading, status);
   }, [loading, status]);
 
   const handleSubmit = (e) => {
@@ -149,8 +146,10 @@ const NewTutorForm = () => {
       //No errors
       const addTutorAction = addTutor({
         values: {
+          userId: user._id,
+          fname: user.name,
+          lname: user.lastName,
           image: image[0],
-          userId: "63f180ae4092a7cc8da26b72",
           description: description,
           spokenLanguages: languages,
           skills: skills,
@@ -193,37 +192,51 @@ const NewTutorForm = () => {
               Register as a Tutor
             </Typography>
           </Grid>
-          <Grid item md={12}>
-            <TextField
-              inputProps={{ readOnly: true }}
-              defaultValue="Sourav Choudhary"
-              variant="outlined"
-              sx={{ margin: "17px 0 0 0" }}
-              fullWidth
-            />
+          <Grid container spacing={2}>
+            <Grid item md={6}>
+              <TextField
+                inputProps={{ readOnly: true }}
+                defaultValue={user.name}
+                variant="outlined"
+                sx={{ margin: "17px 0 0 0" }}
+                fullWidth
+              />
+            </Grid>
+            <Grid item md={6}>
+              <TextField
+                inputProps={{ readOnly: true }}
+                defaultValue={user.lastName}
+                variant="outlined"
+                sx={{ margin: "17px 0 0 0" }}
+                fullWidth
+              />
+            </Grid>
           </Grid>
-          <Grid item md={12}>
-            <TextField
-              inputProps={{ readOnly: true }}
-              defaultValue="sourav@gmail.com"
-              variant="outlined"
-              sx={{ margin: "17px 0 0 0" }}
-              fullWidth
-            />
+          <Grid container spacing={2}>
+            <Grid item md={6}>
+              <TextField
+                inputProps={{ readOnly: true }}
+                defaultValue={user.email}
+                variant="outlined"
+                sx={{ margin: "17px 0 0 0" }}
+                fullWidth
+              />
+            </Grid>
+            <Grid item md={6}>
+              <TextField
+                inputProps={{ readOnly: true }}
+                defaultValue={user.phone}
+                variant="outlined"
+                sx={{ margin: "17px 0 0 0" }}
+                fullWidth
+              />
+            </Grid>
           </Grid>
           <form
             action="POST"
             encType="multipart/form-data"
             style={{ width: "100%" }}
           >
-            {/* user Id */}
-            <input
-              type="text"
-              hidden
-              name="userId"
-              value="63f180ae4092a7cc8da26b72"
-            />
-
             <Grid item md={12}>
               <TagsInput
                 value={skills}
