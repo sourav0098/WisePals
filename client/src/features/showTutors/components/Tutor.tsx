@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { getSubmittedText } from "../../searchTutors/index";
 import TutorCSS from "../assets/Tutor.module.css";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 interface TutorProps {
   priceFilter: [number, number];
@@ -26,7 +26,7 @@ const Tutor: React.FC<TutorProps> = ({
   lessonCost,
   pictureUrl,
   currency,
-  id
+  id,
 }) => {
   const submittedText = useSelector(getSubmittedText);
 
@@ -43,18 +43,25 @@ const Tutor: React.FC<TutorProps> = ({
   )
     return (
       <div className={`${TutorCSS.card}`}>
-        <div className={`${TutorCSS.leftSide}`} style={{cursor: "pointer"}} onClick={()=>{
-              navigate(`/tutorprofile/${id}`)
-            }}>
+        <div
+          className={`${TutorCSS.leftSide}`}
+          style={{ cursor: "pointer" }}
+          onClick={() => {
+            navigate(`/tutorprofile/${id}`);
+          }}
+        >
           <img src={pictureUrl} />
         </div>
         <div className={TutorCSS.center}>
           <div className={TutorCSS.cardTitle}>
-            <h3 
-            style={{cursor: "pointer"}}
-            onClick={()=>{
-              navigate(`/tutorprofile/${id}`)
-            }}>{name}</h3>
+            <h3
+              style={{ cursor: "pointer" }}
+              onClick={() => {
+                navigate(`/tutorprofile/${id}`);
+              }}
+            >
+              {name}
+            </h3>
           </div>
 
           <div className={TutorCSS.skills}>📚{skills.join(", ")}</div>
@@ -63,12 +70,20 @@ const Tutor: React.FC<TutorProps> = ({
             🗣{spokenLanguages.join(", ")}
           </div>
           <br />
-          <div className={TutorCSS.description}>{description.length > 425 ? description.substring(0, 425) + "..." : description}</div>
+          <div className={TutorCSS.description}>
+            {description.length > 425
+              ? description.substring(0, 425) + "..."
+              : description}
+          </div>
         </div>
         <div className={TutorCSS.rightSide}>
-          <div className={TutorCSS.price}>{currency} ${lessonCost}</div>
+          <div className={TutorCSS.price}>
+            {currency} ${lessonCost}
+          </div>
           <div className={TutorCSS.cardButtons}>
-            <button className={TutorCSS.btn}>Contact Tutor</button>
+            <Link to={`/contactTutor/${id}`}>
+              <button className={TutorCSS.btn}>Contact Tutor</button>
+            </Link>
             {/* <button className={`${TutorCSS.btn} ${TutorCSS.btnOutline}`}>
               Contact tutor
             </button> */}
