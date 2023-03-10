@@ -1,5 +1,7 @@
 export const API_ENDPOINTS = {
+  BASE_URL: "http://localhost:5001",
   TUTORS: "/api/v1/tutors",
+  IMAGES: "/img/",
   TEST_AUTH: "/api/v1/tutors/testAuth",
   REGISTER: "/api/v1/auth/register",
   LOGIN: "/api/v1/auth/login",

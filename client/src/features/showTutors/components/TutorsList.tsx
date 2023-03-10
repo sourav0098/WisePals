@@ -10,6 +10,7 @@ import {
 } from "../../searchTutors/index";
 import fetchTeachers from "../../../services/fetchTeachersService";
 import FilterBar from "./filterBar/FilterBar";
+import { API_ENDPOINTS } from "../../../utils/apiEndpoints";
 
 const TutorsList = () => {
   const { skill } = useParams();
@@ -30,15 +31,23 @@ const TutorsList = () => {
 
   const tutors = useSelector(getAllTutors);
 
+  console.log("tutors: ", tutors);
+
   if (!tutors) return <div>Loading...</div>;
   //Map function is to do something to each element of the array
   const tutorItems = tutors.map((tutor: { _id: string }) => {
+    console.log("priceFilter: ", priceFilter);
     return (
       <Tutor
         priceFilter={priceFilter}
-        languagesFilter={spokenLanguagesFilter}
         key={tutor._id}
-        tutor={tutor}
+        languagesFilter={spokenLanguagesFilter}
+        name={`${tutor.fname} ${tutor.lname}`}
+        description={tutor.description}
+        skills={tutor.skills}
+        spokenLanguages={tutor.spokenLanguages}
+        lessonCost={tutor.hourlyRate}
+        pictureUrl={`${API_ENDPOINTS.BASE_URL}${API_ENDPOINTS.IMAGES}${tutor.image}`}
       />
     );
   });

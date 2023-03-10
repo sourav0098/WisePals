@@ -11,7 +11,7 @@ import { Container } from "@mui/material";
 import Autocomplete from "@mui/material/Autocomplete";
 import { Button } from "@mui/material";
 import { useParams } from "react-router-dom";
-import axios from "../lib/axios.ts";
+import axios from "../lib/axios";
 import Swal from "sweetalert2";
 import { useSelector } from "react-redux";
 
@@ -93,18 +93,18 @@ const ContactTutor = () => {
     <Container>
       <Card>
         <CardContent>
-          <Typography variant="h4" component="div">
+          <Typography variant="h4" component="div" fontWeight={500}>
             Contact
           </Typography>
           <Grid container spacing={2} mt={1}>
             <Grid item xs={12} md={12}>
               <FormControl fullWidth sx={{ mr: 5, my: 0 }}>
-                <InputLabel htmlFor="outlined-adornment-amount">
+                <InputLabel htmlFor="title">
                   Title
                 </InputLabel>
                 <OutlinedInput
-                  id="productName"
-                  label="Product Name"
+                  id="title"
+                  label="title"
                   value={title}
                   onChange={handleTitleChange}
                 />

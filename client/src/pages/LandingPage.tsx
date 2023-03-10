@@ -13,7 +13,6 @@ const LandingPage: React.FC = () => {
       .get("http://localhost:5001/api/v1/contents/63e7a5d14236e852403de3c6")
       .then((response) => {
         setContent(response.data.data.description);
-        console.log(response.data.data.description);
       });
   }, []);
   return (

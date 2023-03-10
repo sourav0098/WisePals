@@ -23,7 +23,6 @@ dotenv.config();
 
 //Create server
 const app = express();
-app.use("/img", express.static("./uploads/"));
 
 const PORT = process.env.PORT || 5001;
 //To connect to the Db
@@ -60,3 +59,4 @@ app.use("/api/v1/reviews", reviewRoutes);
 app.use("/api/v1/contents", homeRoutes);
 app.use("/api/v1/contact", contactFomrRoutes);
 app.use("/api/v1/user", userRoutes);
+app.use("/img", express.static("./uploads/"));
