@@ -1,15 +1,31 @@
 import { Avatar, Grid, Rating, Typography } from "@mui/material";
 import { Container, Stack } from "@mui/system";
-import React from "react";
 
-export default function Review() {
+type ReviewProp = {
+  fname: string;
+  lname: string;
+  rating: number;
+  review: string;
+  createdAt: Date;
+};
+
+export default function Review(props: ReviewProp) {
+  const date = new Date(props.createdAt);
+  const formattedDate = date.toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+    hour12: true,
+  });
   return (
     <>
       <Container sx={{ mt: 3, width: "90%" }}>
         <Grid container>
           <Grid item mr={2}>
             <Avatar
-              alt="Alex Benjamin"
+              alt={props.fname + " " + props.lname}
               src="/static/images/avatar/1.jpg"
               sx={{ width: 56, height: 56 }}
             />
@@ -18,19 +34,21 @@ export default function Review() {
             <Stack direction="column">
               <Stack direction="row" justifyContent="space-between">
                 <Typography variant="body1" color="initial" fontWeight={500}>
-                  Alex Benjamin
+                  {props.fname + " " + props.lname}
                 </Typography>
                 <Typography variant="body1" color="initial">
-                  Dec 26,2022
+                  {formattedDate}
                 </Typography>
               </Stack>
-              <Rating name="read-only size-small" value={4} readOnly />
+              <Rating
+                name="read-only size-small"
+                value={props.rating}
+                readOnly
+              />
             </Stack>
           </Grid>
           <Grid item mt={2}>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ratione
-            voluptatibus beatae vitae maiores asperiores. Obcaecati, ex error.
-            Itaque eos cum amet fugit atque?
+            {props.review}
           </Grid>
         </Grid>
       </Container>

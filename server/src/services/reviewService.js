@@ -19,6 +19,9 @@ export const getReviewsByTutorIdService = async (tutorId) => {
         path: "userId",
         select: "userId name lastName",
       },
+      options: {
+        sort: { createdAt: -1 }
+      }
     })
     .exec();
 

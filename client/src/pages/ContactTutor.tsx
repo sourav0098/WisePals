@@ -11,7 +11,7 @@ import { Container } from "@mui/material";
 import Autocomplete from "@mui/material/Autocomplete";
 import { Button } from "@mui/material";
 import { useParams } from "react-router-dom";
-import axios from "../lib/axios.ts";
+import axios from "../lib/axios";
 import Swal from "sweetalert2";
 import { useSelector } from "react-redux";
 

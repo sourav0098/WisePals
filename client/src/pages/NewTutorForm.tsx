@@ -22,10 +22,9 @@ import { addTutor } from "../features/addTutor/store/tutorSlice";
 
 const NewTutorForm = () => {
   //Get the user session from the redux store
-  const user = useSelector((state) => state.session);
-console.log(user)
   const dispatch = useDispatch();
-  const { loading, status } = useSelector((state) => ({
+  const user = useSelector((state:any) => state.session);
+  const { loading, status } = useSelector((state:any) => ({
     ...state.tutorSlice,
   }));
 
@@ -154,6 +153,7 @@ console.log(user)
           spokenLanguages: languages,
           skills: skills,
           hourlyRate: Number(hourlyCost),
+          currency: currency
         },
       });
 

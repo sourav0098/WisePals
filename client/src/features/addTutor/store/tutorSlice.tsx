@@ -12,6 +12,7 @@ interface AddTutorArgs {
     spokenLanguages: string[];
     skills: string[];
     hourlyRate: number;
+    currency: string;
   };
 }
 
@@ -35,7 +36,7 @@ export const addTutor = createAsyncThunk(
       );
       values.skills.forEach((skill) => formData.append("skills", skill));
       formData.append("hourlyRate", values.hourlyRate.toString());
-  
+      formData.append("currency", values.currency);
       // AXIOS POST REQUEST
       try {
         const response = await axios.post(
