@@ -66,6 +66,23 @@ const Header: React.FC<Props> = (props) => {
         </div>
       ) : (
         <>
+          <div className={HeaderCSS.links}>
+            <Link to={"/userProfile"}>Profile</Link>
+          </div>
+        </>
+      )}
+      {user.id !== "" && user?.roles?.includes(ROLES.TUTOR) ? (
+        <Link to={"/statistics"} className={HeaderCSS.companyName}>
+          <img className={HeaderCSS.logo} src={statistics} alt="logo" />
+        </Link>
+      ) : (
+        <></>
+      )}
+
+      {user.id === "" ? (
+        <></>
+      ) : (
+        <>
           <div
             className={HeaderCSS.login}
             onClick={() => {
@@ -87,17 +104,7 @@ const Header: React.FC<Props> = (props) => {
           >
             <MdLogout /> <div className={HeaderCSS.loginText}>Logout {` `}</div>
           </div>
-          <div className={HeaderCSS.links}>
-            <Link to={"/userProfile"}>Profile</Link>
-          </div>
         </>
-      )}
-      {user.id !== "" && user?.roles?.includes(ROLES.TUTOR) ? (
-        <Link to={"/statistics"} className={HeaderCSS.companyName}>
-          <img className={HeaderCSS.logo} src={statistics} alt="logo" />
-        </Link>
-      ) : (
-        <></>
       )}
 
       <Modal open={isModalOpen} setIsModalOpen={setIsModalOpen}>
