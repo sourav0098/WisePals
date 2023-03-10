@@ -222,7 +222,7 @@ export default function TutorProfile() {
           <Divider sx={{ mt: 3, mb: 2 }} />
 
           {/* Reviews Container */}
-          {reviews && reviews.reviews.length > 0 && (
+          {reviews && reviews.reviews.length > 0 ? (
             <Grid container>
               <Grid item md={12}>
                 <Stack direction="row" alignItems="center">
@@ -257,11 +257,10 @@ export default function TutorProfile() {
                   );
                 })}
             </Grid>
-          )}
-          {reviews === null && (
+          ):
+          (
             <Grid item md={8}>
-              <Typography variant="body1" color="initial">
-                {" "}
+              <Typography variant="h5" color="initial" fontWeight={500}>
                 No Reviews Found!
               </Typography>
               <Button

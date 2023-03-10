@@ -44,6 +44,7 @@ export default function Review(props: ReviewProp) {
                 name="read-only size-small"
                 value={props.rating}
                 readOnly
+                precision={0.5}
               />
             </Stack>
           </Grid>

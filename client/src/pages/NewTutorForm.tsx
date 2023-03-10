@@ -310,7 +310,7 @@ const NewTutorForm = () => {
               <TextField
                 id="description"
                 name="description"
-                label="Tell us about yourself"
+                label="Tell us something about yourself"
                 variant="outlined"
                 fullWidth
                 multiline

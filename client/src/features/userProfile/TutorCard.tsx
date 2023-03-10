@@ -107,8 +107,8 @@ const TutorCard = () => {
         <CardContent>
           <Grid container spacing={1}>
             <Grid item md={12}>
-              <Typography variant="h4" fontWeight={500} color="initial" mb={3}>
-                Tutor
+              <Typography variant="h4" fontWeight={500} component="div">
+                Tutor Profile
               </Typography>
             </Grid>
             <Grid item md={6}>

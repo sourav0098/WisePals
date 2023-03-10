@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import UserCard from "../features/userProfile/UserCard.tsx";
+import { useState, useEffect } from "react";
+import UserCard from "../features/userProfile/UserCard";
 import { Box, Container } from "@mui/material";
-import TutorCard from "../features/userProfile/TutorCard.tsx";
-import axios from "../lib/axios.ts";
+import TutorCard from "../features/userProfile/TutorCard";
+import axios from "../lib/axios";
 import { useSelector } from "react-redux";
 
 const UserProfile = () => {

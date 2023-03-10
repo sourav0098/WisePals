@@ -66,18 +66,18 @@ const UserCard = (props: any) => {
     <Container>
       <Card>
         <CardContent>
-          <Typography variant="h4" component="div">
-            UserProfile
+          <Typography variant="h4" component="div" fontWeight={500}>
+            User Profile
           </Typography>
           <Grid container spacing={2} mt={1}>
             <Grid item xs={12} md={6}>
               <FormControl fullWidth sx={{ mr: 5, my: 0 }}>
-                <InputLabel htmlFor="outlined-adornment-amount">
-                  Name
+                <InputLabel htmlFor="fname">
+                First Name
                 </InputLabel>
                 <OutlinedInput
-                  id="Name"
-                  label="Name"
+                  id="fname"
+                  label="First Name"
                   value={name}
                   onChange={handleNameChange}
                 />
@@ -85,12 +85,12 @@ const UserCard = (props: any) => {
             </Grid>
             <Grid item xs={12} md={6}>
               <FormControl fullWidth sx={{ mr: 5, my: 0 }} disabled={true}>
-                <InputLabel htmlFor="outlined-adornment-amount">
+                <InputLabel htmlFor="lname">
                   Last Name
                 </InputLabel>
                 <OutlinedInput
-                  id="Email"
-                  label="Email"
+                  id="lname"
+                  label="Last Name"
                   value={lastName}
                   onChange={handleLastNameChange}
                   disabled={false}
@@ -99,11 +99,11 @@ const UserCard = (props: any) => {
             </Grid>
             <Grid item xs={12} md={6}>
               <FormControl fullWidth sx={{ mr: 5, my: 0 }}>
-                <InputLabel htmlFor="outlined-adornment-amount">
+                <InputLabel htmlFor="email">
                   Email
                 </InputLabel>
                 <OutlinedInput
-                  id="Email"
+                  id="email"
                   label="Email"
                   value={email}
                   disabled={true}
@@ -113,12 +113,12 @@ const UserCard = (props: any) => {
             </Grid>
             <Grid item xs={12} md={6}>
               <FormControl fullWidth sx={{ mr: 5, my: 0 }}>
-                <InputLabel htmlFor="outlined-adornment-amount">
+                <InputLabel htmlFor="phone">
                   Phone
                 </InputLabel>
                 <OutlinedInput
-                  id="Email"
-                  label="Email"
+                  id="phone"
+                  label="Phone"
                   value={phone}
                   onChange={handlePhoneChange}
                 />
