@@ -38,8 +38,7 @@ const Header: React.FC<Props> = (props) => {
       <div className={HeaderCSS.links}>
         <Link to={"/contactTutor/640745747471f3316bd0710e"}>Contact</Link>
       </div>
-      <div className={HeaderCSS.links}>
-        {/* <Link to={"/"}>Test Auth</Link> */}
+      {/* <div className={HeaderCSS.links}>
         <button
           onClick={() => {
             console.log("test auth");
@@ -57,7 +56,7 @@ const Header: React.FC<Props> = (props) => {
         >
           Test Auth
         </button>
-      </div>
+      </div> */}
       {user.id === "" ? (
         <div className={HeaderCSS.login} onClick={() => setIsModalOpen(true)}>
           <MdLogin /> <div className={HeaderCSS.loginText}>Login</div>
