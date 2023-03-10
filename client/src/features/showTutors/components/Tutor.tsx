@@ -1,17 +1,16 @@
-import React from "react";
 import { useSelector } from "react-redux";
 import { getSubmittedText } from "../../searchTutors/index";
 import TutorCSS from "../assets/Tutor.module.css";
 
 interface TutorProps {
+  priceFilter: [number, number];
+  languagesFilter: string[];
   name: string;
   description: string;
   skills: string[];
   spokenLanguages: string[];
   lessonCost: number;
-  picture: string;
-  priceFilter: [number, number];
-  languagesFilter: string[];
+  pictureUrl: string;
 }
 
 const Tutor: React.FC<TutorProps> = ({
@@ -22,10 +21,9 @@ const Tutor: React.FC<TutorProps> = ({
   skills,
   spokenLanguages,
   lessonCost,
-  picture,
+  pictureUrl,
 }) => {
   const submittedText = useSelector(getSubmittedText);
-
   const containLanguage = spokenLanguages.some((language) =>
     languagesFilter.includes(language.toLowerCase())
   );
@@ -39,8 +37,7 @@ const Tutor: React.FC<TutorProps> = ({
     return (
       <div className={`${TutorCSS.card}`}>
         <div className={`${TutorCSS.leftSide}`}>
-          {/* <img src={picture} /> */}
-          <img src="https://images.unsplash.com/photo-1453396450673-3fe83d2db2c4?crop=entropy&cs=tinysrgb&fm=jpg&ixid=MnwzNTYxMDZ8MHwxfHNlYXJjaHwxfHxtYW4lMjBmYWNlc3xlbnwwfHx8fDE2NzQyNDU2MTU&ixlib=rb-4.0.3&q=80" />
+          <img src={pictureUrl} />
         </div>
         <div className={TutorCSS.center}>
           <div className={TutorCSS.cardTitle}>

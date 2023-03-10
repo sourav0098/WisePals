@@ -6,16 +6,16 @@ import PriceSlider from "./PriceSlider";
 
 interface Props {
   tutorItems: Array<{
-    lessonCost: number;
+    hourlyRate: number;
   }>;
+  setPriceFilter: (price: number[]) => void;
   setSpokenLanguagesFilter: (languages: Array<string>) => void;
-  setPriceFilter: (price: number) => void;
 }
 
 const FilterBar: React.FC<Props> = ({
   tutorItems,
-  setSpokenLanguagesFilter,
   setPriceFilter,
+  setSpokenLanguagesFilter,
 }) => {
   return (
     <div className={FilterBarCSS.filterBar}>

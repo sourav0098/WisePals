@@ -5,7 +5,6 @@ import propTypes, { ReactNodeLike } from "prop-types";
 interface PriceSliderProps {
   highestPrice: number;
   setPriceFilter: (price: number[]) => void;
-  ReactNodeLike: ReactNodeLike;
 }
 
 const PriceSlider = (props: PriceSliderProps) => {
@@ -52,7 +51,7 @@ const PriceSlider = (props: PriceSliderProps) => {
             className="inputMin"
             value={minPrice}
             readOnly
-            disabled="disabled"
+            // disabled="disabled"
           />
         </div>
         <div className={PriceSliderCSS.separator}>-</div>
@@ -62,7 +61,7 @@ const PriceSlider = (props: PriceSliderProps) => {
             className="inputMax"
             value={maxPrice}
             readOnly
-            disabled="disabled"
+            // disabled="disabled"
           />
         </div>
       </div>
@@ -89,7 +88,7 @@ const PriceSlider = (props: PriceSliderProps) => {
               if (Number(lowPrice) >= Number(maxPrice))
                 setMinPrice(Number(maxPrice) - rangeGap);
               else {
-                setMinPrice(lowPrice);
+                setMinPrice(Number(lowPrice));
               }
             }
           }}
@@ -107,7 +106,7 @@ const PriceSlider = (props: PriceSliderProps) => {
               if (Number(maxPrice) <= Number(minPrice)) {
                 setMaxPrice(Number(minPrice) + rangeGap);
               } else {
-                setMaxPrice(maxPrice);
+                setMaxPrice(Number(maxPrice));
               }
             }
           }}
