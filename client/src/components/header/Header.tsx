@@ -10,7 +10,6 @@ import { useLocation, RouteComponentProps } from "react-router-dom";
 import { MdLogin } from "react-icons/md";
 import Modal from "../modal/Modal";
 import Authentication from "../../pages/Authentication";
-import { API_ENDPOINTS } from "../../utils/apiEndpoints";
 import useRefreshToken from "../../hooks/useRefreshToken";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { useSelector } from "react-redux";
@@ -33,12 +32,11 @@ const Header: React.FC<Props> = (props) => {
         </Link>
       </div>
       <div className={HeaderCSS.SearchBar}>{path != "/" && <SearchBar />}</div>
-      <div className={HeaderCSS.links}>
-        <Link to={"/addTutor"}>Teach</Link>
-      </div>
-      <div className={HeaderCSS.links}>
-        <Link to={"/contactTutor/640b5e217831423705ef0171"}>Contact</Link>
-      </div>
+
+      {/* Show join as tutor only when user is not tutor*/}
+      {user.id != "" &&  !user.roles.includes(5777) &&<div className={HeaderCSS.links}>
+        <Link to={"/addTutor"}>Join Our Tutor Team</Link>
+      </div>}
       {/* <div className={HeaderCSS.links}>
         <button
           onClick={() => {
@@ -60,6 +58,7 @@ const Header: React.FC<Props> = (props) => {
       </div> */}
       {user.id === "" ? (
         <div className={HeaderCSS.login} onClick={() => setIsModalOpen(true)}>
+          
           <MdLogin /> <div className={HeaderCSS.loginText}>Login</div>
         </div>
       ) : (
@@ -67,7 +66,7 @@ const Header: React.FC<Props> = (props) => {
           <Link to={"/userProfile"}>Profile</Link>
         </div>
       )}
-      {user?.roles?.includes(ROLES.TUTOR) ? (
+      {user.id !=="" && user?.roles?.includes(ROLES.TUTOR) ? (
         <Link to={"/statistics"} className={HeaderCSS.companyName}>
           <img className={HeaderCSS.logo} src={statistics} alt="logo" />
         </Link>

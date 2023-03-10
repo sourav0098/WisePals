@@ -17,7 +17,9 @@ const router = express.Router();
 const cache = apicache.middleware;
 
 router
-  .get("/", cache("2 minutes"), getTutors)
+  .get("/", 
+  // cache("2 minutes"), 
+  getTutors)
   .get(
     "/testAuth",
     verifyJWT,

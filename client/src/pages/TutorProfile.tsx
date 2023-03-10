@@ -1,4 +1,5 @@
 import React, { useState} from "react";
+import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -28,6 +29,8 @@ import { getReviews, addReview } from "../features/reviews/store/reviewSlice";
 
 export default function TutorProfile() {
   const dispatch = useDispatch();
+  const navigate=useNavigate();
+
   const user = useSelector((state: any) => state.session);
   const tutor = useSelector(
     (state: any) => state.tutorProfileSlice.tutorProfile
@@ -38,7 +41,7 @@ export default function TutorProfile() {
   useEffect(() => {
     dispatch(getTutorProfile(id));
   }, [dispatch,id]);
-
+  
   useEffect(() => {
     if (tutor) {
       dispatch(getReviews(tutor._id));
@@ -97,8 +100,7 @@ export default function TutorProfile() {
       // Submit Review
       const reviewData = {
         tutorId: tutor._id,
-        // userId: user.id,
-        userId: "640a75a9f9d0d4a41a9ea26f",
+        userId: user.id,
         rating: rating,
         review: review,
       };
@@ -179,9 +181,7 @@ export default function TutorProfile() {
                   component="h4"
                 >
                   {tutor.fname + " " + tutor.lname}
-                  <a href={`mailto:${tutor.userId.email}`}>
-                    <EmailIcon sx={{ color: "gray", ml: 1 }} />
-                  </a>
+                    <EmailIcon sx={{ color: "gray", ml: 1 }} onClick={()=>{navigate("/contactTutor/"+tutor._id)}} />
                 </Typography>
               </Stack>
               <Rating
@@ -202,7 +202,7 @@ export default function TutorProfile() {
                   : "no languages"}
               </Typography>
               <Typography variant="body1" component="h2">
-                Cost: {tutor.hourlyRate} {tutor.currency} /hr
+                Cost: {tutor.currency} ${tutor.hourlyRate}  /hr
               </Typography>
               <Typography variant="body1" component="h2">
                 Number of classes given: {tutor.classesGiven}
@@ -229,19 +229,26 @@ export default function TutorProfile() {
                   <StarIcon sx={{ color: "#faaf00" }} />
                   <Typography ml={1} variant="h6" color="initial">
                     {avgRating.toFixed(1)} tutor rating | {reviews.numReviews}{" "}
-                    {reviews.numReviews === 1 || 0 ? "rating" : "ratings"}
+                    {reviews.numReviews === 1 || 0 ? "review" : "reviews"}
                   </Typography>
                 </Stack>
               </Grid>
 
               {/* Add a Review Component */}
-              <Button
+              {/* User is logged in show add a review button */}
+              {user.id!="" && <Button
                 variant="contained"
                 sx={{ mt: 1 }}
                 onClick={handleClickOpen}
               >
                 Add a Review
-              </Button>
+              </Button>} 
+              {/* Show please login to add a review */}
+              {
+                user.id==="" && 
+                <Typography variant="body1" color="#1976d2" fontWeight={500}>Please login to add a review</Typography>
+              }
+
               {/* Review Component */}
               {reviews &&
                 reviews.reviews.map((r: any) => {
@@ -263,13 +270,19 @@ export default function TutorProfile() {
               <Typography variant="h5" color="initial" fontWeight={500}>
                 No Reviews Found!
               </Typography>
-              <Button
+              {/* User is logged in show add a review button */}
+              {user.id!="" && <Button
                 variant="contained"
                 sx={{ mt: 1 }}
                 onClick={handleClickOpen}
               >
                 Add a Review
-              </Button>
+              </Button>} 
+              {/* Show please login to add a review */}
+              {
+                user.id==="" && 
+                <Typography variant="body1" color="#1976d2" fontWeight={500}>Please login to add a review</Typography>
+              }
             </Grid>
           )}
         </Container>

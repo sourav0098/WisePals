@@ -31,14 +31,12 @@ const TutorsList = () => {
 
   const tutors = useSelector(getAllTutors);
 
-  console.log("tutors: ", tutors);
-
   if (!tutors) return <div>Loading...</div>;
   //Map function is to do something to each element of the array
   const tutorItems = tutors.map((tutor: { _id: string }) => {
-    console.log("priceFilter: ", priceFilter);
     return (
       <Tutor
+        id={tutor._id}
         priceFilter={priceFilter}
         key={tutor._id}
         languagesFilter={spokenLanguagesFilter}
@@ -48,6 +46,7 @@ const TutorsList = () => {
         spokenLanguages={tutor.spokenLanguages}
         lessonCost={tutor.hourlyRate}
         pictureUrl={`${API_ENDPOINTS.BASE_URL}${API_ENDPOINTS.IMAGES}${tutor.image}`}
+        currency={tutor.currency}
       />
     );
   });
