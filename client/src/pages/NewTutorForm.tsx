@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Container from "@mui/material/Container";
 import { REGEX_VALIDATIONS } from "../utils/regexValidations";
 import Swal from "sweetalert2";
+import ROLES from "../utils/rolesList";
 
 import {
   Grid,
@@ -19,12 +21,15 @@ import { TagsInput } from "react-tag-input-component";
 import ImageUpload from "../features/addTutor/components/ImageUpload";
 import { FileWithPath } from "react-dropzone";
 import { addTutor } from "../features/addTutor/store/tutorSlice";
+import { login } from "../features/authentication/store/authenticationSlice";
 
 const NewTutorForm = () => {
   //Get the user session from the redux store
   const dispatch = useDispatch();
-  const user = useSelector((state:any) => state.session);
-  const { loading, status } = useSelector((state:any) => ({
+  const navigate = useNavigate();
+  const user = useSelector((state: any) => state.session);
+
+  const { loading, status } = useSelector((state: any) => ({
     ...state.tutorSlice,
   }));
 
@@ -100,6 +105,7 @@ const NewTutorForm = () => {
     return errors;
   };
 
+  // Alert based on response status
   const showAlert = (loading: any, status: any) => {
     if (loading === false && status === 201) {
       Swal.fire({
@@ -108,6 +114,7 @@ const NewTutorForm = () => {
         icon: "success",
         confirmButtonText: "OK",
       });
+      navigate("/userProfile");
     } else if (loading === false && status === 409) {
       Swal.fire({
         text: "User is aleady registered as tutor",
@@ -153,11 +160,19 @@ const NewTutorForm = () => {
           spokenLanguages: languages,
           skills: skills,
           hourlyRate: Number(hourlyCost),
-          currency: currency
+          currency: currency,
         },
       });
 
-      dispatch(addTutorAction);
+      dispatch(addTutorAction).then(() => {
+        dispatch(
+          login({
+            ...user,
+            roles: [...user.roles, ROLES.TUTOR],
+          })
+        );
+        console.log(user);
+      });
 
       // Reset form
       setImage([]);
@@ -166,6 +181,8 @@ const NewTutorForm = () => {
       setCurrency("");
       setHourlyCost("");
       setDescription("");
+      
+
 
       setErrors({
         image: false,
@@ -175,6 +192,7 @@ const NewTutorForm = () => {
         currency: false,
         description: false,
       });
+
     }
   };
 

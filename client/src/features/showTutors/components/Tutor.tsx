@@ -26,7 +26,7 @@ const Tutor: React.FC<TutorProps> = ({
   lessonCost,
   pictureUrl,
   currency,
-  id,
+  id
 }) => {
   const submittedText = useSelector(getSubmittedText);
 
@@ -36,7 +36,7 @@ const Tutor: React.FC<TutorProps> = ({
   );
 
   if (
-    (!languagesFilter.length || containLanguage == true) &&
+    (!languagesFilter.length || containLanguage === true) &&
     submittedText !== undefined &&
     ((lessonCost <= priceFilter[1] && lessonCost >= priceFilter[0]) ||
       !priceFilter)
@@ -50,7 +50,7 @@ const Tutor: React.FC<TutorProps> = ({
             navigate(`/tutorprofile/${id}`);
           }}
         >
-          <img src={pictureUrl} />
+          <img src={pictureUrl} alt="tutor profile" />
         </div>
         <div className={TutorCSS.center}>
           <div className={TutorCSS.cardTitle}>
@@ -78,7 +78,7 @@ const Tutor: React.FC<TutorProps> = ({
         </div>
         <div className={TutorCSS.rightSide}>
           <div className={TutorCSS.price}>
-            {currency} ${lessonCost}
+            {currency} ${lessonCost} /hr
           </div>
           <div className={TutorCSS.cardButtons}>
             <Link to={`/contactTutor/${id}`}>

@@ -26,6 +26,7 @@ import Review from "../features/reviews/components/Review";
 import { useTheme } from "@mui/material/styles";
 import { getTutorProfile } from "../features/showTutorProfile/store/tutorProfileSlice";
 import { getReviews, addReview } from "../features/reviews/store/reviewSlice";
+import { API_ENDPOINTS } from "../utils/apiEndpoints";
 
 export default function TutorProfile() {
   const dispatch = useDispatch();
@@ -162,7 +163,7 @@ export default function TutorProfile() {
               {/* Avatar Image */}
               <Avatar
                 alt="Remy Sharp"
-                src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=388&q=80"
+                src={`${API_ENDPOINTS.BASE_URL}${API_ENDPOINTS.IMAGES}${tutor.image}`}
                 sx={{ width: 200, height: 200 }}
               />
             </Grid>
@@ -181,7 +182,7 @@ export default function TutorProfile() {
                   component="h4"
                 >
                   {tutor.fname + " " + tutor.lname}
-                    <EmailIcon sx={{ color: "gray", ml: 1 }} onClick={()=>{navigate("/contactTutor/"+tutor._id)}} />
+                    <EmailIcon sx={{ color: "gray", ml: 1, cursor:"pointer" }} onClick={()=>{navigate("/contactTutor/"+tutor._id)}} />
                 </Typography>
               </Stack>
               <Rating

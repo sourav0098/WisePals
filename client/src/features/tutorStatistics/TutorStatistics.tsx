@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Paper from "@mui/material/Paper";
 import axios from "../../lib/axios";
 import { Container } from "@mui/material";
@@ -90,11 +90,11 @@ const TutorStatistics = () => {
   return (
     <Container sx={{ height: "100vh" }}>
       <Paper sx={{ py: 5, px: 5 }}>
-        <Typography variant="h5" component="h3">
+        <Typography variant="h4" component="h4" fontWeight={500}>
           Tutor Statistics
         </Typography>
         <Typography component="p">
-          Number of times Contacted: {totalContacts}{" "}
+          Number of times contacted: {totalContacts}{" "}
         </Typography>
         <Typography component="p">
           Skills for which the tutor was contacted this week:
@@ -108,7 +108,7 @@ const TutorStatistics = () => {
               ))}
             </ul>
           ) : (
-            <p>No skills found.</p>
+            <p>No skills found</p>
           )}
         </Typography>
 

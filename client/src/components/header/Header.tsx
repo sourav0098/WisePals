@@ -4,7 +4,6 @@ import HeaderCSS from "../../assets/Header.module.css";
 
 import SearchBar from "../../features/searchTutors/components/SearchBar";
 import logoImage from "../../assets/logo.png";
-import statistics from "../../assets/statistics.png";
 
 import {
   useLocation,
@@ -15,8 +14,6 @@ import { MdLogin } from "react-icons/md";
 import { MdLogout } from "react-icons/md";
 import Modal from "../modal/Modal";
 import Authentication from "../../pages/Authentication";
-import useRefreshToken from "../../hooks/useRefreshToken";
-import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import ROLES from "../../utils/rolesList";
@@ -41,7 +38,7 @@ const Header: React.FC<Props> = (props) => {
       <div className={HeaderCSS.SearchBar}>{path != "/" && <SearchBar />}</div>
 
       {/* Show join as tutor only when user is not tutor*/}
-      {user.id != "" && !user.roles.includes(5777) && (
+      {user.id != "" && !user.roles.includes(ROLES.TUTOR) && (
         <div className={HeaderCSS.links}>
           <Link to={"/addTutor"}>Join Our Tutor Team</Link>
         </div>
@@ -67,6 +64,7 @@ const Header: React.FC<Props> = (props) => {
       </div> */}
       {user.id === "" ? (
         <div className={HeaderCSS.login} onClick={() => setIsModalOpen(true)}>
+          
           <MdLogin /> <div className={HeaderCSS.loginText}>Login</div>
         </div>
       ) : (
@@ -77,9 +75,11 @@ const Header: React.FC<Props> = (props) => {
         </>
       )}
       {user.id !== "" && user?.roles?.includes(ROLES.TUTOR) ? (
-        <Link to={"/statistics"} className={HeaderCSS.companyName}>
-          <img className={HeaderCSS.logo} src={statistics} alt="logo" />
-        </Link>
+        <div className={HeaderCSS.links}>
+          <Link to={"/statistics"}>
+            Tutor Statistics
+          </Link>
+        </div>
       ) : (
         <></>
       )}
@@ -111,7 +111,6 @@ const Header: React.FC<Props> = (props) => {
           </div>
         </>
       )}
-
       <Modal open={isModalOpen} setIsModalOpen={setIsModalOpen}>
         <Authentication />
       </Modal>
