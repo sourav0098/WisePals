@@ -6,7 +6,11 @@ import SearchBar from "../../features/searchTutors/components/SearchBar";
 import logoImage from "../../assets/logo.png";
 import statistics from "../../assets/statistics.png";
 
-import { useLocation, RouteComponentProps } from "react-router-dom";
+import {
+  useLocation,
+  RouteComponentProps,
+  useNavigate,
+} from "react-router-dom";
 import { MdLogin } from "react-icons/md";
 import { MdLogout } from "react-icons/md";
 import Modal from "../modal/Modal";
@@ -21,6 +25,7 @@ import { login } from "../../features/authentication/store/authenticationSlice";
 interface Props extends RouteComponentProps {}
 
 const Header: React.FC<Props> = (props) => {
+  const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const user = useSelector((state: any) => state.session);
   const path = useLocation().pathname;
@@ -100,6 +105,7 @@ const Header: React.FC<Props> = (props) => {
                   phone: "",
                 })
               );
+              navigate("/");
             }}
           >
             <MdLogout /> <div className={HeaderCSS.loginText}>Logout {` `}</div>
