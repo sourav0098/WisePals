@@ -5,8 +5,9 @@
   width: 900px;
   border: 0;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2);
-
+  max-height: 240px;
   display: flex;
+  /* justify-content: space-between; */
 }
 
 .leftSide {
@@ -20,7 +21,8 @@
   display: block;
   width: 100%;
   min-height: 200px;
-  max-height: 400px;
+  max-height: 200px;
+  max-width: 200px;
   /* aspect-ratio: 16 / 9; */
   aspect-ratio: 1 / 1;
   object-fit: cover;
@@ -34,6 +36,7 @@
   flex-direction: column;
 
   font-size: 0.9rem;
+  min-width: 450px;
 }
 .cardTitle {
   font-size: 1.5rem;

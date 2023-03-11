@@ -26,7 +26,7 @@ const Tutor: React.FC<TutorProps> = ({
   lessonCost,
   pictureUrl,
   currency,
-  id
+  id,
 }) => {
   const submittedText = useSelector(getSubmittedText);
 
@@ -72,7 +72,7 @@ const Tutor: React.FC<TutorProps> = ({
           <br />
           <div className={TutorCSS.description}>
             {description.length > 425
-              ? description.substring(0, 425) + "..."
+              ? description.substring(0, 210) + "..."
               : description}
           </div>
         </div>
