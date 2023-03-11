@@ -15,9 +15,18 @@ const LanguagesFilter: React.FC<tutorItemsProps> = ({
 
   const languagesOfTutors: Array<object> = [];
   tutorItems.map((tutor: object) => {
-    tutor.spokenLanguages.map((language: string) =>
-      languagesOfTutors.push({ language })
-    );
+    tutor.spokenLanguages.map((language: string) => {
+      const languageUpperCase = language.toUpperCase();
+      const languageFirstLetterUpperCase =
+        language[0].toUpperCase() + language.slice(1);
+      if (
+        !languagesOfTutors.some(
+          (item) => item.language.toUpperCase() === languageUpperCase
+        )
+      ) {
+        languagesOfTutors.push({ language: languageFirstLetterUpperCase });
+      }
+    });
   });
 
   const convertAndsetSpokenLanguagesFilter = (
