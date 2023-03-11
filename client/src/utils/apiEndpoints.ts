@@ -7,7 +7,7 @@ export const API_ENDPOINTS = {
   LOGIN: "/api/v1/auth/login",
   LOGOUT: "/api/v1/auth/logout",
   REFRESH: "/api/v1/auth/refresh",
-  REVIEWS:"/api/v1/reviews",
-  CONTACTS:"/api/v1/contact",
-  STATISTICS:"/statistics"
+  REVIEWS: "/api/v1/reviews",
+  CONTACTS: "/api/v1/contact",
+  STATISTICS: "/statistics",
 };

@@ -15,6 +15,7 @@ import axios from "../../lib/axios.ts";
 import Swal from "sweetalert2";
 import { FileWithPath } from "react-dropzone";
 import { useSelector } from "react-redux";
+import { API_ENDPOINTS } from "../../utils/apiEndpoints.ts";
 
 const TutorCard = () => {
   const user = useSelector((state: any) => state.session);
@@ -27,21 +28,15 @@ const TutorCard = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:5001/api/v1/tutors/byUser/?id=${user.id}`, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-      .then((res) => {
-        setId(res.data._id);
-        setSkills(res.data.skills);
-        setLanguages(res.data.spokenLanguages);
-        setHourlyCost(res.data.hourlyRate);
-        setDescription(res.data.description);
-        setPicture("http://localhost:5001/img/" + res.data.image);
-        setIsLoading(false);
-      });
+    axios.get(`/api/v1/tutors/byUser/?id=${user.id}`, {}).then((res) => {
+      setId(res.data._id);
+      setSkills(res.data.skills);
+      setLanguages(res.data.spokenLanguages);
+      setHourlyCost(res.data.hourlyRate);
+      setDescription(res.data.description);
+      setPicture(API_ENDPOINTS.BASE_URL + "/img/" + res.data.image);
+      setIsLoading(false);
+    });
   }, []);
 
   const handleHourlyCostChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -55,9 +50,10 @@ const TutorCard = () => {
     var bodyFormData = new FormData();
     bodyFormData.append("id", id);
     bodyFormData.append("image", acceptedFiles[0]);
+    console.log(id);
     axios({
-      method: "PUT",
-      url: "http://localhost:5001/api/v1/tutors/image",
+      method: "put",
+      url: "/api/v1/tutors/image",
       data: bodyFormData,
       headers: { "Content-Type": "multipart/form-data" },
     })
@@ -66,19 +62,14 @@ const TutorCard = () => {
   }
 
   const handleSubmit = () => {
-    fetch("http://localhost:5001/api/v1/tutors/", {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
+    axios
+      .put("/api/v1/tutors/", {
         id: id,
         skills: skills,
         spokenLanguages: languages,
         hourlyRate: hourlyCost,
         description: description,
-      }),
-    })
+      })
       .then((response) => {
         if (response.status === 200) {
           Swal.fire({

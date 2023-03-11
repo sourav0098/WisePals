@@ -29,7 +29,7 @@ const ContactTutor = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5001/api/v1/tutors/byId/?id=${tutor}`, {
+      .get(`api/v1/tutors/byId/?id=${tutor}`, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -53,21 +53,16 @@ const ContactTutor = () => {
   };
 
   const handleSubmit = () => {
-    fetch("http://localhost:5001/api/v1/contact/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
+    axios
+      .post("/api/v1/contact/", {
         title: title,
         language: language,
         skill: skill,
         description: description,
         user: user.id,
         tutor: tutor,
-      }),
-    }).then((response) => {
-      if (response.status === 200) {
+      })
+      .then((response) => {
         setTitle("");
         setDescription("");
         setLanguage("");
@@ -78,15 +73,15 @@ const ContactTutor = () => {
           icon: "success",
           confirmButtonText: "OK",
         });
-      } else {
+      })
+      .catch((err) => {
         Swal.fire({
           title: "Error!",
-          text: "Verify the fields",
+          text: err.message,
           icon: "error",
           confirmButtonText: "OK",
         });
-      }
-    });
+      });
   };
 
   return (
@@ -99,9 +94,7 @@ const ContactTutor = () => {
           <Grid container spacing={2} mt={1}>
             <Grid item xs={12} md={12}>
               <FormControl fullWidth sx={{ mr: 5, my: 0 }}>
-                <InputLabel htmlFor="title">
-                  Title
-                </InputLabel>
+                <InputLabel htmlFor="title">Title</InputLabel>
                 <OutlinedInput
                   id="title"
                   label="title"

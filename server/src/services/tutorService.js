@@ -25,10 +25,13 @@ export const createNewTutorService = async ({ profile, file }) => {
   try {
     const tutor = await new Tutor(data).save();
     // Add this line to update the role in User table
-    await User.updateOne({ _id: data.userId }, { $set: { roles: { User:roles.user, Tutor: roles.tutor } } });
-  return tutor;
+    await User.updateOne(
+      { _id: data.userId },
+      { $set: { roles: { User: roles.user, Tutor: roles.tutor } } }
+    );
+    return tutor;
   } catch (error) {
-    if (error.name === 'MongoError' && error.code === 11000) {
+    if (error.name === "MongoError" && error.code === 11000) {
       throw new Error(`User already registered as tutor`);
     } else {
       throw error;
@@ -43,9 +46,11 @@ export const getTutorService = async (id) => {
 
 // Get Tutor by ID
 export const getTutorByIdService = async (id) => {
-  const tutor = await Tutor.findOne({ _id: id }).populate({ path: 'userId', select: 'name lastName email' }).exec();
+  const tutor = await Tutor.findOne({ _id: id })
+    .populate({ path: "userId", select: "name lastName email" })
+    .exec();
   return tutor;
-}
+};
 
 export const getTutorByUserService = async (id) => {
   const tutor = await Tutor.findOne({
@@ -81,11 +86,13 @@ export const updateTutorService = async (
   }
 };
 
-export const updateImageService = async ({ id, file }) => {
+export const updateImageService = async ({ id, image }) => {
+  console.log(id);
+  console.log(image);
   const tutor = Tutor.findOneAndUpdate(
     { id },
     {
-      image: file,
+      image: image,
     },
     { new: true }
   );

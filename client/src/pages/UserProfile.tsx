@@ -15,20 +15,14 @@ const UserProfile = () => {
   const [isLaoding, setIsLoading] = useState(true);
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:5001/api/v1/user/byId/?id=${user.id}`, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-      .then((res) => {
-        setName(res.data.name);
-        setLastName(res.data.lastName);
-        setEmail(res.data.email);
-        setPhone(res.data.phone);
-        setIsTutor(user.roles.includes(5777));
-        setIsLoading(false);
-      });
+    axios.get(`/api/v1/user/byId/?id=${user.id}`).then((res) => {
+      setName(res.data.name);
+      setLastName(res.data.lastName);
+      setEmail(res.data.email);
+      setPhone(res.data.phone);
+      setIsTutor(user.roles.includes(5777));
+      setIsLoading(false);
+    });
   }, []);
   if (isLaoding) {
     return <Container></Container>;

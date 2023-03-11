@@ -9,6 +9,7 @@ import Typography from "@mui/material/Typography";
 import { Container } from "@mui/material";
 import { Button } from "@mui/material";
 import Swal from "sweetalert2";
+import axios from "../../lib/axios.ts";
 
 const UserCard = (props: any) => {
   const [name, setName] = useState(props.name);
@@ -32,34 +33,30 @@ const UserCard = (props: any) => {
   };
 
   const handleSubmit = () => {
-    fetch("http://localhost:5001/api/v1/user/", {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
+    axios
+      .put("/api/v1/user/", {
         name: name,
         lastName: lastName,
         email: email,
         phone: phone,
-      }),
-    }).then((res) => {
-      if (res.status === 200) {
-        Swal.fire({
-          title: "Success!",
-          text: "You have updated your profile",
-          icon: "success",
-          confirmButtonText: "OK",
-        });
-      } else {
-        Swal.fire({
-          title: "Error!",
-          text: "Verify the fields",
-          icon: "error",
-          confirmButtonText: "OK",
-        });
-      }
-    });
+      })
+      .then((res) => {
+        if (res.status === 200) {
+          Swal.fire({
+            title: "Success!",
+            text: "You have updated your profile",
+            icon: "success",
+            confirmButtonText: "OK",
+          });
+        } else {
+          Swal.fire({
+            title: "Error!",
+            text: "Verify the fields",
+            icon: "error",
+            confirmButtonText: "OK",
+          });
+        }
+      });
   };
 
   return (
@@ -72,9 +69,7 @@ const UserCard = (props: any) => {
           <Grid container spacing={2} mt={1}>
             <Grid item xs={12} md={6}>
               <FormControl fullWidth sx={{ mr: 5, my: 0 }}>
-                <InputLabel htmlFor="fname">
-                First Name
-                </InputLabel>
+                <InputLabel htmlFor="fname">First Name</InputLabel>
                 <OutlinedInput
                   id="fname"
                   label="First Name"
@@ -85,9 +80,7 @@ const UserCard = (props: any) => {
             </Grid>
             <Grid item xs={12} md={6}>
               <FormControl fullWidth sx={{ mr: 5, my: 0 }} disabled={true}>
-                <InputLabel htmlFor="lname">
-                  Last Name
-                </InputLabel>
+                <InputLabel htmlFor="lname">Last Name</InputLabel>
                 <OutlinedInput
                   id="lname"
                   label="Last Name"
@@ -99,9 +92,7 @@ const UserCard = (props: any) => {
             </Grid>
             <Grid item xs={12} md={6}>
               <FormControl fullWidth sx={{ mr: 5, my: 0 }}>
-                <InputLabel htmlFor="email">
-                  Email
-                </InputLabel>
+                <InputLabel htmlFor="email">Email</InputLabel>
                 <OutlinedInput
                   id="email"
                   label="Email"
@@ -113,9 +104,7 @@ const UserCard = (props: any) => {
             </Grid>
             <Grid item xs={12} md={6}>
               <FormControl fullWidth sx={{ mr: 5, my: 0 }}>
-                <InputLabel htmlFor="phone">
-                  Phone
-                </InputLabel>
+                <InputLabel htmlFor="phone">Phone</InputLabel>
                 <OutlinedInput
                   id="phone"
                   label="Phone"

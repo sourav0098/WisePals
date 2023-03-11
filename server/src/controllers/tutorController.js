@@ -99,16 +99,15 @@ export const getTutor = async (req, res) => {
   }
 };
 
-
 // Get tutor by id
 export const getTutorById = async (req, res) => {
   try {
-    const id  = req.params.id;
+    const id = req.params.id;
     res.status(200).json(await getTutorByIdService(id));
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
-}
+};
 
 export const getByUser = async (req, res) => {
   try {
@@ -122,10 +121,9 @@ export const getByUser = async (req, res) => {
 export const createNewTutor = async (req, res) => {
   try {
     upload.single("image")(req, res, async (err) => {
-      if(err instanceof multer.MulterError) {
+      if (err instanceof multer.MulterError) {
         res.status().send(err);
-      }
-      else if (err) {
+      } else if (err) {
         return res.status(400).json({ message: err.message });
       }
       try {
@@ -173,6 +171,7 @@ export const updateTutor = async (req, res) => {
 
 export const updateImage = async (req, res) => {
   try {
+    console.log(req.body);
     const { id } = req.body;
     upload.single("image")(req, res, async (err) => {
       if (err) {
@@ -180,7 +179,7 @@ export const updateImage = async (req, res) => {
       }
       const tutor = await updateImageService({
         id: id,
-        file: uniqueImageName,
+        image: uniqueImageName,
       });
       res.status(200).json(tutor);
     });
