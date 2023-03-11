@@ -14,6 +14,7 @@ import {
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
 import { useSelector } from "react-redux";
+import { API_ENDPOINTS } from "../../utils/apiEndpoints";
 
 ChartJS.register(
   CategoryScale,
@@ -43,11 +44,14 @@ const TutorStatistics = () => {
   const [skills, setSkills] = useState<any>();
   useEffect(() => {
     axios
-      .get(`http://localhost:5001/api/v1/contact/statistics/${user.id}`, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
+      .get(
+        `${API_ENDPOINTS.BASE_URL}${API_ENDPOINTS.CONTACTS}${API_ENDPOINTS.STATISTICS}/${user.id}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
       .then((res: any) => {
         const daysOfWeek = [
           "Sunday",
