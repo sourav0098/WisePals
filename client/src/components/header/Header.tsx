@@ -91,7 +91,6 @@ const Header: React.FC<Props> = (props) => {
           <div
             className={HeaderCSS.login}
             onClick={() => {
-              console.log("logout");
               // Dispatch login action
               dispatch(
                 login({

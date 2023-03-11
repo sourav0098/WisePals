@@ -74,7 +74,6 @@ const Login: React.FC<LoginProps> = ({
           }
         );
 
-        console.log({ response });
         const accessToken = response?.data?.accessToken;
         const roles = response?.data?.roles;
 

@@ -13,8 +13,6 @@ const useRefreshToken = () => {
             //To send the HTTP Cookie with the refresh token in the request
             withCredentials: true,
         });
-        console.log('Previous access token: ', user.accessToken);
-        console.log('New access token: ', response?.data?.accessToken);
         //If the refresh token is valid, update the user session in the redux store
         if (response?.data?.accessToken) {
             //Update the user session in the redux store
