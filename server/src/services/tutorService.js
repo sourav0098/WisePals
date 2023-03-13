@@ -87,10 +87,8 @@ export const updateTutorService = async (
 };
 
 export const updateImageService = async ({ id, image }) => {
-  console.log(id);
-  console.log(image);
   const tutor = Tutor.findOneAndUpdate(
-    { id },
+    { _id: id },
     {
       image: image,
     },

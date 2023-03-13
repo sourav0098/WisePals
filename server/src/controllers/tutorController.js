@@ -171,12 +171,11 @@ export const updateTutor = async (req, res) => {
 
 export const updateImage = async (req, res) => {
   try {
-    console.log(req.body);
-    const { id } = req.body;
     upload.single("image")(req, res, async (err) => {
       if (err) {
         return res.status(400).json({ message: err.message });
       }
+      const { id } = req.body;
       const tutor = await updateImageService({
         id: id,
         image: uniqueImageName,
