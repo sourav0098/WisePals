@@ -8,7 +8,9 @@ https://clear-jade-scarab.cyclic.app
 
 ### Rodigo
 
-I wo
+I worked on the UserProfile page in which a login user can see his information and update the name, last name or phone. If the user is a tutor, he can also update the tutori information like skills, languages, description, and profile picture. I developed the front end and backend of this page.
+
+The second page I worked on was the contact form, in which you will send a message to a tutor you want to contact, the tutur id will be a parameter in the url, it will fetch the tutor data to populate the skills and language options. Once all of the input is filled it will save the user can send the contact form. I developed the front end and back end functionality
 
 ## Overview
 
