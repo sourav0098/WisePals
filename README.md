@@ -71,20 +71,6 @@ Inside client and server folder run:
 npm start
 ```
 
-## To populate DB With Random Tutors
-
-<details>
-<summary>Click to Expand</summary>
-Start the server and go to the following path:
-
-```
-http://localhost:5001/api/v1/generate-random-tutors
-```
-
-The DB will be populated with the number of tutors that you defined in the RANDOM_TUTORS_NUMBER variable of your .env file.
-
-</details>
-
 ### Contributors
 
 Juan Gutierrez [<img src="https://i.stack.imgur.com/gVE0j.png" alt="Linkedin">](https://www.linkedin.com/in/-juan-gutierrez/)  
