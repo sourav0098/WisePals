@@ -6,6 +6,12 @@ https://clear-jade-scarab.cyclic.app
 
 ## Task Division
 
+### Juan Gutierrez
+
+I worked on the Find Tutors page in which a user can filter for tutors based on different parameters such as the subject and the price. I developed the front end and back end functionality.
+
+The second page I worked on was the login, register and session features. I developed the front end and back end functionality. The authentication is implemented using JWT and the session is available in the client application using the redux store.
+
 ### Rodigo
 
 I worked on the UserProfile page in which a login user can see his information and update the name, last name or phone. If the user is a tutor, he can also update the tutori information like skills, languages, description, and profile picture. I developed the front end and backend of this page.
@@ -19,16 +25,12 @@ Wise Paals is a platform that connects students with tutors. The user can filter
 ## Features
 
 - [x] Register and Login Page (Modal)
-- [x] Forgot Password
+- [x] Session
+- [x] JWT Authentication
 - [x] Find Tutors based on different filters
 - [x] Register as a tutor
 - [x] Contact tutors
 - [x] User and Tutor(Profile, Settings)
-- [x] Admin Dashboard with web App statistics
-- [x] Admin Users and Tutors management
-- [x] FAQ
-- [x] About Us
-- [x] Contact Us
 
 ## Technologies
 
